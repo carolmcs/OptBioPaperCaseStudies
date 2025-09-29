@@ -1,0 +1,5 @@
+Varies per block?       ,1,Unit,MWh,2,1,2024
+Varies per sequence?    ,1
+# of agents             ,1
+Stag,Seq.,Blck,Electrolysis
+1,1,1,0.0

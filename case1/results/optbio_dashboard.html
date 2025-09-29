@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="PSR Energy">
+<meta name="generator" content="PSRIO v1.3.0-beta">
+<link rel="icon" href="https://js-scripts.psr-inc.com/psrplot/images/icon.png">
+<title>OptBio</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css"> 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.5.1/github-markdown-light.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/default.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-bs5@2.1.2/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-dt@2.1.1/css/jquery.dataTables.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-buttons-dt@3.0.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables.net-dt@2.0.8/css/dataTables.dataTables.min.css">
+<style>
+.bd-placeholder-img {font-size:1.125rem;text-anchor: middle;-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+@media (min-width: 768px) {.bd-placeholder-img-lg {font-size: 3.5rem;}}
+body{font-size:.875rem; padding-bottom: 100px}
+.navbar-color { background-color: #1D1D1B !important; }
+.lucide{width:16px;height:16px;vertical-align:text-bottom}
+.sidebar{height: calc(100vh - 80px); box-shadow:inset -1px 0 0 rgba(0,0,0,0);overflow-y:auto}
+.sidebar-sticky{position:relative; top:0; height:calc(100vh - 48px); padding-top:.5rem; overflow-x:hidden; overflow-y:auto}
+.sidebar .nav-link{font-weight:500; color:#333}
+.sidebar .nav-link .lucide{margin-right:4px; color:#727272}
+.sidebar .nav-link.active{color:#2470dc}
+.sidebar .nav-link.active .lucide, .sidebar .nav-link:hover .lucide{color:inherit}
+.sidebar .navbar-controller { width: 220px; }
+.sidebar-heading{font-size:.75rem; text-transform:uppercase}
+.sidebar-wrapper {height:calc(100% - 40px);position:fixed;z-index:1;left:0;bottom:0;background-color:#f2f2f2;overflow-x:hidden;border-right: 1px solid #c4c4c4;}
+.sidebar-wrapper .social-footer {position: absolute; width: 100%; height: 40px; bottom:0; background-color: #f2f2f2; border-top: 1px solid #c4c4c4; display: flex; flex-direction: row; align-items: center; }
+.sidebar-wrapper .social-footer .footer-icon {color: black; margin: 0px 15px;}
+.navbar {text-align: center; justify-content: center; height: 40px; position: fixed; width: 100%;}
+.navbar .navbar-brand {float: none; padding-top:.4rem;padding-bottom:.4rem;font-size:1rem;}
+.navbar .navbar-brand .navbar-logo { width: 60px; }
+.navbar .navbar-toggler{ display: none; right: 1rem; border: 0px; color: transparent; }
+.navbar .navbar-toggler:focus, .navbar .navbar-toggler:focus-visible{border:0px; color: transparent;}
+.navbar .form-control{padding:.75rem 1rem;border-width:0;border-radius:0}
+.form-control-dark{color:#fff;background-color:rgba(255,255,255,.1);border-color:rgba(255,255,255,.1)}
+.form-control-dark:focus{border-color:transparent;box-shadow:0 0 0 3px rgba(255,255,255,.25)}
+.highcharts-data-table table { text-align: center; border-collapse: collapse; border-spacing: 0; background: white; min-width: 100%; margin-top: 10px; font-family: sans-serif; font-size: 0.9em; }
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption { border: 1px solid silver; padding: 0.5em; }
+.highcharts-data-table tr:nth-child(even), .highcharts-data-table thead tr { background: #f8f8f8; }
+.highcharts-data-table tr:hover { background: #eff; }
+.highcharts-data-table caption { border-bottom: none; font-size: 1.1em; font-weight: bold; }
+.tab-content > .tab-pane:not(.active) { display: none; }
+.main-content {width: calc(100% - 220px); padding-top: 40px; transition: 0.35s ease; overflow-x: hidden;}
+@media (max-width: 992px) {
+.navbar .navbar-toggler { display: block; right: 1rem; left: auto }
+.sidebar .navbar-controller { width: 100vw } 
+.main-content {width: 100%;} }
+@media (min-width: 993px) {
+.sidebar.collapse { display: block !important; } }
+.dataTables_wrapper { width: 100% !important;}
+table.dataTable { width: 100% !important;}
+table.dataTable th, table.dataTable td { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; font-size: 20px; border-right: 1px solid #ddd; vertical-align: middle; padding: 8px; }
+table.dataTable th:last-child, table.dataTable td:last-child { border-right: none; }
+table.dataTable tbody tr:nth-child(odd) { background-color: #f9f9f9; }
+table.dataTable tbody tr:nth-child(even) { background-color: #ffffff; }
+.dataTables_filter, .dataTables_info { display: none; }
+.dt-buttons { float: right; margin-bottom: 10px; margin-top: -48px; }
+.dataTables_filter { float: right; }
+.dataTables_paginate { float: right; }
+.dataTables_length { float: left; }
+</style>
+</head>
+<body>
+<header class="navbar navbar-dark sticky-top navbar-color flex-md-nowrap p-0 shadow">
+<button class ="navbar-toggler position-absolute collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3">
+<img src="https://js-scripts.psr-inc.com/psrplot/images/logo-white.png" class="navbar-logo" alt="OptBio"></img>
+</a>
+</header>
+<div class="sidebar-wrapper">
+<nav id="sidebarMenu" class="sidebar collapse">
+<div class="navbar-controller">
+<div class="pb-3 pt-3 overflow-auto">
+<ul class="nav flex-column">
+<li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" data-bs-target="#lLmsQSghmCPheLsO" href="#"><span icon-name="factory"></span>Production Overview</a></li>
+<li class="nav-item"><a class="nav-link" data-bs-toggle="pill" data-bs-target="#YJPQOubvJSeBAlWn" href="#"><span icon-name="receipt"></span>Costs and Revenues</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<footer class="social-footer justify-content-center">
+<a title="LinkedIn" href="https://www.linkedin.com/company/psrenergy" target="_blank" rel="noopener noreferrer"><i class="bi bi-linkedin footer-icon"></i></a>
+<a title="GitHub" href="https://github.com/psrenergy" target="_blank" rel="noopener noreferrer"><i class="bi bi-github footer-icon"></i></a>
+<a title="Facebook" href="https://www.facebook.com/psrenergy" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook footer-icon"></i></a>
+<a title="Twitter" href="https://twitter.com/psrenergy" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x footer-icon"></i></a>
+<a title="Instagram" href="https://www.instagram.com/psrenergy" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram footer-icon"></i></a>
+</footer>
+</div>
+<main id="content" class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+<div class="tab-content">
+<div class="tab-pane fade show active" id="lLmsQSghmCPheLsO" role="tabpanel">
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h1>Production Overview</h1>
+<h2>Plants Capacity</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="cHYNVZHcpqUGRIWN"></div><div class="col-md" id="iQXdfJpwPxFBlKPN"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="pEELFJMtkuQPZoMw"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Products Balance</h2>
+<h2>Ethanol 1G</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="dSYDsgvFPEnEmwBo"></div><div class="col-md" id="riFSUQhCEskMKhsS"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="BVQoPqfOViUsSQFq"></div><div class="col-md" id="WeHTxDzUjTlntxMR"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="JxXWtLgGKYTBIoly"></div><div class="col-md" id="dniLqADojSkKvFxa"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="HhjmbOCLjARInTdW"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Electricity</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="ojUotHWMlvRgLfZD"></div><div class="col-md" id="ZdBtubxuoffvNCrS"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="qpnCKWvNhkeBmTDh"></div><div class="col-md" id="VygkJisUxHatMuUD"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="qbhMknHfXAxqxkjl"></div><div class="col-md" id="ZzQTsJFAEEDfUujK"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="olXJOqkDVfePVlHV"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Land</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="YxLijjHevRyXOZba"></div><div class="col-md" id="fpFMoWGrGONuAtdq"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="edzLODsrKEuTgtnK"></div><div class="col-md" id="nTArjkPXInOvgzDt"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="HuNwOOxVJJmPSVKn"></div><div class="col-md" id="HKWJOPMmLebKSUCv"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="zQlyqnwCmBVbhRMl"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Sugarcane</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="IcxapzARKnnXtuuf"></div><div class="col-md" id="ArZrOsDqWSMTcjgh"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="qRxycRxUWjxNpQjN"></div><div class="col-md" id="bKcPdMOkALXApemV"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="bQLzsVxZKutaPpWG"></div><div class="col-md" id="zpDPyZkzCvBntCvF"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="xsxpjaOxTFHvXXYT"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Straw</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="PhwZyiayAbJrQgep"></div><div class="col-md" id="PxyJSTtYZUVldvyb"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="znPGhOZvAFMSNsnQ"></div><div class="col-md" id="IvMVubCWTfsrqTmK"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="NepBHoWEjaZHKwcm"></div><div class="col-md" id="MTpiXxXLZqySXtwW"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="taIdYAxYqlePRxIB"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Sugar</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="YfwPJSFyBglGZmBI"></div><div class="col-md" id="nTaTTnHOdtOnpYzW"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="WzaBSDNvQhkFCmof"></div><div class="col-md" id="IsFrFQgvpmvoRPJF"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="zsLzMpJjnEhrYkxJ"></div><div class="col-md" id="ZUbuAcClFKCyZoBG"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="HtUoxRAJvPREcWGX"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Filter Cake</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="NQWCuQDSCILIQECi"></div><div class="col-md" id="HLuILGMFCSWtwKkx"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="LPGfgRATzbSGUvzI"></div><div class="col-md" id="fNhyxWJsjAVwaUXp"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="annAMxJDVzUHNACz"></div><div class="col-md" id="YHepwzOlHusLrKvW"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="PNVGzMIizWuDwdFz"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Bagasse</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="ezkmesBjlkyerTAH"></div><div class="col-md" id="NexHUqmJicbMUSqd"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="ZfwyUcpabQSeFFun"></div><div class="col-md" id="QPkfNnBeCBbcjpdy"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="jlIbItllpLxELrdK"></div><div class="col-md" id="exdTquvPttEyHTLQ"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="LBBBvoQOzkyNayYR"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Vinasse</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="exWBioEWqVqRTcDl"></div><div class="col-md" id="pQmVJiFVgYmKGOTZ"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="HJiTsSpaQNjrdoYJ"></div><div class="col-md" id="WpYatMleYQSVkpAm"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="SvbmVxrllIvfedKJ"></div><div class="col-md" id="IgAvyXjVEqvRBACU"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="IGAiPyHbBXiPBznC"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>CO2</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="weaAfJEQiozPYFAU"></div><div class="col-md" id="uqmVhXkMnXMSyamp"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h3>Histograms</h3>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="jRRWbwHMQHZkHdkc"></div><div class="col-md" id="rFVBeiYIpVfVPZhY"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="uJABtQwWtBkdogKE"></div><div class="col-md" id="mhibYXrNXsxrzLeT"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="bqExKRqOiernAPLQ"></div></div></div>
+</div>
+<div class="tab-pane fade" id="YJPQOubvJSeBAlWn" role="tabpanel">
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h1>Costs and Revenues</h1>
+<h2>Plants Annuity (Capex)</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="TWZZvEWxoTaKuDKP"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Annual Processes Opex</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="VdcpLbKlPjMPFdCY"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Annual Revenues (Sales)</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="qMcuPRYjautEuvCZ"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Annual Revenues (Sales) by scenario</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="wxFAigAYRUeIcuFD"></div>
+<div id="play-control">
+<div id="titleChart-wxFAigAYRUeIcuFD"></div>
+<i id="play-button-wxFAigAYRUeIcuFD" class="lucide lucide-circle-play" data-lucide="circle-play"></i>
+<i id="pause-button-wxFAigAYRUeIcuFD" class="lucide lucide-circle-pause" data-lucide="circle-pause" style="display: none;"></i>
+<input id="range-input-wxFAigAYRUeIcuFD" type="range" value="0" min="0" max="0" />
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Annual Profit</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="VzqMEyRoVFIcHQNi"></div></div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="row markdown-body pt-3 pb-3">
+<div class="col"><h2>Annual costs and revenues (Average values)</h2>
+</div>
+</div>
+</div></div>
+<div class="container-fluid"><div class="row markdown-body pt-3 pb-3">
+<div class="col-md" id="RGpuGxtuhlCvsPIh"></div></div></div>
+</div>
+</div>
+</main>
+<div id="loadingBlocker">Loading</div>
+<style>
+#play-controls{
+margin-left:50px;
+}        
+[id^=play-button-], [id^=pause-button-]{
+width:30px;
+height: 30px;
+color: #1a63c1;
+stroke-width: 1;           
+cursor: pointer;
+}
+[id^=range-input-]{
+width:89%;
+transform: translateY(-2.5px);
+}
+[id^=titleChart-]{
+text-align: center;
+font-size: large;
+color: black;
+}
+#loadingBlocker {
+position: fixed;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: 9999;
+overflow: hidden;
+text-align: center;
+font-size: 40px;
+font-family: var(--bs-font-sans-serif);
+font-weight: bold;
+color: white;
+line-height: 100%;
+display: flex;
+justify-content: center; /* Align horizontal */
+align-items: center; /* Align vertical */
+}
+</style>
+<script>
+// Alter which tab will be open by default, based on id redirect
+const splitted = window.location.href.split('#');
+let section_id = "";
+if (splitted.length > 1) {
+section_id = splitted[1];
+if (section_id.length > 0) {
+var tabs = document.getElementsByClassName("tab-pane");
+var current_tab = document.getElementsByClassName("tab-pane fade show active")[0];
+for (let i = 0; i < tabs.length; i++) {
+let anchors = tabs[i].getElementsByTagName("a");
+for (let j = 0; j < anchors.length; j++) {
+let tab_anchor = anchors[j];
+if (tab_anchor.id === section_id) {
+current_tab.className = current_tab.className.replace(/(?:^|\s)show(?!\S)/g, '').replace(/(?:^|\s)active(?!\S)/g, '');
+var current_nav = document.querySelectorAll('[href="#' + current_tab.id + '"]')[0];
+if (!current_nav || current_nav.length === 0) {
+current_nav = document.querySelectorAll('[data-bs-target="#' + current_tab.id + '"]')[0];
+}
+current_nav.className = current_nav.className.replace(/(?:^|\s)active(?!\S)/g, '');
+tabs[i].className += " show active";
+var right_nav = document.querySelectorAll('[href="#' + tabs[i].id + '"]')[0];
+if (!right_nav || right_nav.length === 0) {
+right_nav = document.querySelectorAll('[data-bs-target="#' + tabs[i].id + '"]')[0];
+}
+right_nav.className += " active";
+break;
+}
+}
+}
+}
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/highcharts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/highcharts-more.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/data.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/annotations.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/streamgraph.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/heatmap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/histogram-bellcurve.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/no-data-to-display.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/exporting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/offline-exporting.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/export-data.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highcharts@11.4.3/modules/boost.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/accesslog.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/languages/dos.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables.net@2.1.2/js/dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables.net-bs5@2.1.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/datatables.net-buttons@3.0.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.10/build/pdfmake.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/pdfmake@0.2.10/build/vfs_fonts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ouanalyse-datatables.net-buttons-html5@1.5.3/js/buttons.html5.min.js"></script>
+<script src="https://js-scripts.psr-inc.com/psrplot/0.15/psrplot.min.js"></script>
+<script>
+lucide.createIcons();
+hljs.highlightAll();
+const YrtNSJVW = new PSRPlot("cHYNVZHcpqUGRIWN", "Harvesting", "");
+YrtNSJVW.push_layers([{"categories":["initial capacity","added capacity"],"data":[46000.0,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"ha"}]);
+YrtNSJVW.redraw();
+
+const ZXssQxnj = new PSRPlot("iQXdfJpwPxFBlKPN", "Electricity from residues", "");
+ZXssQxnj.push_layers([{"categories":["initial capacity","added capacity"],"data":[0.0,227676.766],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+ZXssQxnj.redraw();
+
+const OmUyjnJu = new PSRPlot("pEELFJMtkuQPZoMw", "Ethanol 1G + Sugar Mill", "");
+OmUyjnJu.push_layers([{"categories":["initial capacity","added capacity"],"data":[3872982.0,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+OmUyjnJu.redraw();
+
+const WrSYxwqY = new PSRPlot("dSYDsgvFPEnEmwBo", "Average values", "");
+WrSYxwqY.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,132964.906,0.0,-132964.906],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"kl"}]);
+WrSYxwqY.redraw();
+
+const yxcsZpoK = new PSRPlot("riFSUQhCEskMKhsS", "Scenarios", "");
+yxcsZpoK.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[109000.0,109478.712,109478.712,109478.712,218972.88],[0.0,0.0,0.0,0.0,0.0],[109000.0,109478.712,109478.712,109478.712,218972.88],[0.0,0.0,0.0,0.0,0.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"kl"}]);
+yxcsZpoK.redraw();
+
+const lwjdrlTB = new PSRPlot("BVQoPqfOViUsSQFq", "Initial availability", "");
+lwjdrlTB.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Ethanol 1G","showInLegend":false,"type":"histogram","yUnit":"L"}]);
+lwjdrlTB.redraw();
+
+const scIEDpiw = new PSRPlot("WeHTxDzUjTlntxMR", "Produced", "");
+scIEDpiw.push_layers([{"data":[218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,109478712.0,109000000.0,109478712.0,218972880.0,109478712.0,109000000.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109000000.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109478712.0,109000000.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0],"domain":"linear","name":"Ethanol 1G","showInLegend":false,"type":"histogram","yUnit":"L"}]);
+scIEDpiw.redraw();
+
+const LAQiGesJ = new PSRPlot("JxXWtLgGKYTBIoly", "Consumed by other processes", "");
+LAQiGesJ.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Ethanol 1G","showInLegend":false,"type":"histogram","yUnit":"L"}]);
+LAQiGesJ.redraw();
+
+const SQhsjLRg = new PSRPlot("dniLqADojSkKvFxa", "Sold", "");
+SQhsjLRg.push_layers([{"data":[218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,109478712.0,109000000.0,109478712.0,218972880.0,109478712.0,109000000.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109000000.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109478712.0,109000000.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109000000.0,109000000.0,109000000.0,109000000.0,109478712.0,109000000.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,218972880.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0,109478712.0],"domain":"linear","name":"Ethanol 1G","showInLegend":false,"type":"histogram","yUnit":"L"}]);
+SQhsjLRg.redraw();
+
+const lMWanRXr = new PSRPlot("HhjmbOCLjARInTdW", "Final availability", "");
+lMWanRXr.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Ethanol 1G","showInLegend":false,"type":"histogram","yUnit":"L"}]);
+lMWanRXr.redraw();
+
+const FnWAKZtg = new PSRPlot("ojUotHWMlvRgLfZD", "Average values", "");
+FnWAKZtg.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,421382.036,0.0,-421382.036],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"MWh"}]);
+FnWAKZtg.redraw();
+
+const JhxAUNfq = new PSRPlot("ZdBtubxuoffvNCrS", "Scenarios", "");
+JhxAUNfq.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[218570.031,439090.906,439090.906,439090.906,439090.906],[0.0,0.0,0.0,0.0,0.0],[218570.031,439090.906,439090.906,439090.906,439090.906],[0.0,0.0,0.0,0.0,0.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"MWh"}]);
+JhxAUNfq.redraw();
+
+const JVxioHnJ = new PSRPlot("qpnCKWvNhkeBmTDh", "Initial availability", "");
+JVxioHnJ.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Electricity","showInLegend":false,"type":"histogram","yUnit":"MWh"}]);
+JVxioHnJ.redraw();
+
+const qrjShYmd = new PSRPlot("VygkJisUxHatMuUD", "Produced", "");
+qrjShYmd.push_layers([{"data":[439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,439090.906,439090.906,218570.031,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,218570.031,218570.031,218570.031,218570.031,439090.906,437170.906,437170.906,437170.906,437170.906,437170.906,218570.031,437170.906,439090.906,439090.906,218570.031,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,218570.031,218570.031,218570.031,439090.906,437170.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906],"domain":"linear","name":"Electricity","showInLegend":false,"type":"histogram","yUnit":"MWh"}]);
+qrjShYmd.redraw();
+
+const ovwGEfhj = new PSRPlot("qbhMknHfXAxqxkjl", "Consumed by other processes", "");
+ovwGEfhj.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Electricity","showInLegend":false,"type":"histogram","yUnit":"MWh"}]);
+ovwGEfhj.redraw();
+
+const esVhTIZI = new PSRPlot("ZzQTsJFAEEDfUujK", "Sold", "");
+esVhTIZI.push_layers([{"data":[439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,439090.906,439090.906,218570.031,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,439090.906,218570.031,218570.031,218570.031,218570.031,439090.906,437170.906,437170.906,437170.906,437170.906,437170.906,218570.031,437170.906,439090.906,439090.906,218570.031,218570.031,439090.906,439090.906,439090.906,439090.906,439090.906,218570.031,218570.031,218570.031,218570.031,439090.906,437170.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906,439090.906],"domain":"linear","name":"Electricity","showInLegend":false,"type":"histogram","yUnit":"MWh"}]);
+esVhTIZI.redraw();
+
+const OjLJdpMo = new PSRPlot("olXJOqkDVfePVlHV", "Final availability", "");
+OjLJdpMo.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Electricity","showInLegend":false,"type":"histogram","yUnit":"MWh"}]);
+OjLJdpMo.redraw();
+
+const XBYuYopQ = new PSRPlot("YxLijjHevRyXOZba", "Average values", "");
+XBYuYopQ.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[46000.0,0.0,-44144.785,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"ha"}]);
+XBYuYopQ.redraw();
+
+const JkztVjgk = new PSRPlot("fpFMoWGrGONuAtdq", "Scenarios", "");
+JkztVjgk.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[46000.0,46000.0,46000.0,46000.0,46000.0],[0.0,0.0,0.0,0.0,0.0],[22897.813,46000.0,46000.0,46000.0,46000.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,23102.188]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"ha"}]);
+JkztVjgk.redraw();
+
+const wXkewPzH = new PSRPlot("edzLODsrKEuTgtnK", "Initial availability", "");
+wXkewPzH.push_layers([{"data":[46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0],"domain":"linear","name":"Land","showInLegend":false,"type":"histogram","yUnit":"ha"}]);
+wXkewPzH.redraw();
+
+const BJSuthSy = new PSRPlot("nTArjkPXInOvgzDt", "Produced", "");
+BJSuthSy.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Land","showInLegend":false,"type":"histogram","yUnit":"ha"}]);
+BJSuthSy.redraw();
+
+const oefJgwwY = new PSRPlot("HuNwOOxVJJmPSVKn", "Consumed by other processes", "");
+oefJgwwY.push_layers([{"data":[46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,22897.813,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,22897.813,46000.0,46000.0,46000.0,22897.813,22897.813,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,22897.813,46000.0,22897.813,22897.813,22897.813,22897.813,46000.0,45798.859,45798.859,45798.859,45798.859,45798.859,22897.813,45798.859,46000.0,46000.0,22897.813,22897.813,46000.0,46000.0,46000.0,46000.0,46000.0,22897.813,22897.813,22897.813,22897.813,46000.0,45798.859,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0,46000.0],"domain":"linear","name":"Land","showInLegend":false,"type":"histogram","yUnit":"ha"}]);
+oefJgwwY.redraw();
+
+const EOzluhMg = new PSRPlot("HKWJOPMmLebKSUCv", "Sold", "");
+EOzluhMg.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Land","showInLegend":false,"type":"histogram","yUnit":"ha"}]);
+EOzluhMg.redraw();
+
+const aBBSqRhC = new PSRPlot("zQlyqnwCmBVbhRMl", "Final availability", "");
+aBBSqRhC.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23102.188,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23102.188,0.0,0.0,0.0,23102.188,23102.188,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,23102.188,0.0,23102.188,23102.188,23102.188,23102.188,0.0,201.142,201.142,201.142,201.142,201.142,23102.188,201.142,0.0,0.0,23102.188,23102.188,0.0,0.0,0.0,0.0,0.0,23102.188,23102.188,23102.188,23102.188,0.0,201.142,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Land","showInLegend":false,"type":"histogram","yUnit":"ha"}]);
+aBBSqRhC.redraw();
+
+const rtxMJvCa = new PSRPlot("IcxapzARKnnXtuuf", "Average values", "");
+rtxMJvCa.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,3708161.94,-3708161.94,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+rtxMJvCa.redraw();
+
+const xXsUFAHY = new PSRPlot("ArZrOsDqWSMTcjgh", "Scenarios", "");
+xXsUFAHY.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[1923416.25,3864000.0,3864000.0,3864000.0,3864000.0],[1923416.25,3864000.0,3864000.0,3864000.0,3864000.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+xXsUFAHY.redraw();
+
+const yaYzKhuH = new PSRPlot("qRxycRxUWjxNpQjN", "Initial availability", "");
+yaYzKhuH.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugarcane","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+yaYzKhuH.redraw();
+
+const JRJSVoqh = new PSRPlot("bKcPdMOkALXApemV", "Produced", "");
+JRJSVoqh.push_layers([{"data":[3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,3864000.0,3864000.0,1923416.25,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,1923416.25,1923416.25,1923416.25,1923416.25,3864000.0,3847104.0,3847104.0,3847104.0,3847104.0,3847104.0,1923416.25,3847104.0,3864000.0,3864000.0,1923416.25,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,1923416.25,1923416.25,1923416.25,3864000.0,3847104.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0],"domain":"linear","name":"Sugarcane","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+JRJSVoqh.redraw();
+
+const TydwPbsZ = new PSRPlot("bQLzsVxZKutaPpWG", "Consumed by other processes", "");
+TydwPbsZ.push_layers([{"data":[3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,3864000.0,3864000.0,1923416.25,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,3864000.0,1923416.25,1923416.25,1923416.25,1923416.25,3864000.0,3847104.0,3847104.0,3847104.0,3847104.0,3847104.0,1923416.25,3847104.0,3864000.0,3864000.0,1923416.25,1923416.25,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,1923416.25,1923416.25,1923416.25,1923416.25,3864000.0,3847104.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0,3864000.0],"domain":"linear","name":"Sugarcane","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+TydwPbsZ.redraw();
+
+const XSBzIYRV = new PSRPlot("zpDPyZkzCvBntCvF", "Sold", "");
+XSBzIYRV.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugarcane","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+XSBzIYRV.redraw();
+
+const GqmLunWs = new PSRPlot("xsxpjaOxTFHvXXYT", "Final availability", "");
+GqmLunWs.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugarcane","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+GqmLunWs.redraw();
+
+const cpIRZfcB = new PSRPlot("PhwZyiayAbJrQgep", "Average values", "");
+cpIRZfcB.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,519142.672,-218494.389,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+cpIRZfcB.redraw();
+
+const tseplKgW = new PSRPlot("PxyJSTtYZUVldvyb", "Scenarios", "");
+tseplKgW.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[269278.281,540960.0,540960.0,540960.0,540960.0],[113332.609,227676.766,227676.766,227676.766,227676.766],[0.0,0.0,0.0,0.0,0.0],[155945.672,313283.219,313283.219,313283.219,313283.219]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+tseplKgW.redraw();
+
+const FkhRoUoy = new PSRPlot("znPGhOZvAFMSNsnQ", "Initial availability", "");
+FkhRoUoy.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Straw","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+FkhRoUoy.redraw();
+
+const srwMQojA = new PSRPlot("IvMVubCWTfsrqTmK", "Produced", "");
+srwMQojA.push_layers([{"data":[540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,269278.281,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,269278.281,540960.0,540960.0,540960.0,269278.281,269278.281,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,269278.281,540960.0,269278.281,269278.281,269278.281,269278.281,540960.0,538594.563,538594.563,538594.563,538594.563,538594.563,269278.281,538594.563,540960.0,540960.0,269278.281,269278.281,540960.0,540960.0,540960.0,540960.0,540960.0,269278.281,269278.281,269278.281,269278.281,540960.0,538594.563,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0,540960.0],"domain":"linear","name":"Straw","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+srwMQojA.redraw();
+
+const HYqMfeVS = new PSRPlot("NepBHoWEjaZHKwcm", "Consumed by other processes", "");
+HYqMfeVS.push_layers([{"data":[227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,113332.609,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,113332.609,227676.766,227676.766,227676.766,113332.609,113332.609,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,113332.609,227676.766,113332.609,113332.609,113332.609,113332.609,227676.766,226681.219,226681.219,226681.219,226681.219,226681.219,113332.609,226681.219,227676.766,227676.766,113332.609,113332.609,227676.766,227676.766,227676.766,227676.766,227676.766,113332.609,113332.609,113332.609,113332.609,227676.766,226681.219,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766,227676.766],"domain":"linear","name":"Straw","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+HYqMfeVS.redraw();
+
+const dCoMryhG = new PSRPlot("MTpiXxXLZqySXtwW", "Sold", "");
+dCoMryhG.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Straw","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+dCoMryhG.redraw();
+
+const DmLXukWY = new PSRPlot("taIdYAxYqlePRxIB", "Final availability", "");
+DmLXukWY.push_layers([{"data":[313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,155945.672,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,155945.672,313283.219,313283.219,313283.219,155945.672,155945.672,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,155945.672,313283.219,155945.672,155945.672,155945.672,155945.672,313283.219,311913.344,311913.344,311913.344,311913.344,311913.344,155945.672,311913.344,313283.219,313283.219,155945.672,155945.672,313283.219,313283.219,313283.219,313283.219,313283.219,155945.672,155945.672,155945.672,155945.672,313283.219,311913.344,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219,313283.219],"domain":"linear","name":"Straw","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+DmLXukWY.redraw();
+
+const ZCPrSKWG = new PSRPlot("YfwPJSFyBglGZmBI", "Average values", "");
+ZCPrSKWG.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,278794.104,0.0,-278794.104],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+ZCPrSKWG.redraw();
+
+const XuLSuCKb = new PSRPlot("nTaTTnHOdtOnpYzW", "Scenarios", "");
+XuLSuCKb.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[83341.625,167427.125,335008.813,335008.813,335008.813],[0.0,0.0,0.0,0.0,0.0],[83341.625,167427.125,335008.813,335008.813,335008.813],[0.0,0.0,0.0,0.0,0.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+XuLSuCKb.redraw();
+
+const sePJEIsZ = new PSRPlot("WzaBSDNvQhkFCmof", "Initial availability", "");
+sePJEIsZ.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugar","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+sePJEIsZ.redraw();
+
+const SGcEZwAP = new PSRPlot("IsFrFQgvpmvoRPJF", "Produced", "");
+SGcEZwAP.push_layers([{"data":[167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,167427.125,167427.125,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,167427.125,167427.125,335008.813,335008.813,83341.625,335008.813,167427.125,335008.813,83341.625,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,83341.625,335008.813,83341.625,83341.625,83341.625,83341.625,335008.813,333543.938,333543.938,333543.938,333543.938,333543.938,83341.625,333543.938,335008.813,335008.813,83341.625,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,83341.625,83341.625,83341.625,83341.625,335008.813,333543.938,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,167427.125,167427.125,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813],"domain":"linear","name":"Sugar","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+SGcEZwAP.redraw();
+
+const QRvLwigr = new PSRPlot("zsLzMpJjnEhrYkxJ", "Consumed by other processes", "");
+QRvLwigr.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugar","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+QRvLwigr.redraw();
+
+const OvjcDZXx = new PSRPlot("ZUbuAcClFKCyZoBG", "Sold", "");
+OvjcDZXx.push_layers([{"data":[167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,167427.125,167427.125,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,167427.125,167427.125,335008.813,335008.813,83341.625,335008.813,167427.125,335008.813,83341.625,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,83341.625,335008.813,83341.625,83341.625,83341.625,83341.625,335008.813,333543.938,333543.938,333543.938,333543.938,333543.938,83341.625,333543.938,335008.813,335008.813,83341.625,83341.625,335008.813,335008.813,335008.813,335008.813,335008.813,83341.625,83341.625,83341.625,83341.625,335008.813,333543.938,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,167427.125,167427.125,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,335008.813,335008.813,335008.813,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,167427.125,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813,335008.813],"domain":"linear","name":"Sugar","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+OvjcDZXx.redraw();
+
+const pHqLsRZi = new PSRPlot("HtUoxRAJvPREcWGX", "Final availability", "");
+pHqLsRZi.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Sugar","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+pHqLsRZi.redraw();
+
+const hmgZRIOq = new PSRPlot("NQWCuQDSCILIQECi", "Average values", "");
+hmgZRIOq.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,111244.858,0.0,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+hmgZRIOq.redraw();
+
+const RqEtkZfb = new PSRPlot("HLuILGMFCSWtwKkx", "Scenarios", "");
+RqEtkZfb.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[57702.488,115920.0,115920.0,115920.0,115920.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0],[57702.488,115920.0,115920.0,115920.0,115920.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+RqEtkZfb.redraw();
+
+const LDJiEMsf = new PSRPlot("LPGfgRATzbSGUvzI", "Initial availability", "");
+LDJiEMsf.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Filter Cake","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+LDJiEMsf.redraw();
+
+const ZBHzfnwy = new PSRPlot("fNhyxWJsjAVwaUXp", "Produced", "");
+ZBHzfnwy.push_layers([{"data":[115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,115920.0,115920.0,57702.488,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,57702.488,57702.488,57702.488,57702.488,115920.0,115413.125,115413.125,115413.125,115413.125,115413.125,57702.488,115413.125,115920.0,115920.0,57702.488,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,57702.488,57702.488,57702.488,115920.0,115413.125,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0],"domain":"linear","name":"Filter Cake","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+ZBHzfnwy.redraw();
+
+const wMXxGdPy = new PSRPlot("annAMxJDVzUHNACz", "Consumed by other processes", "");
+wMXxGdPy.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Filter Cake","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+wMXxGdPy.redraw();
+
+const lraxglMt = new PSRPlot("YHepwzOlHusLrKvW", "Sold", "");
+lraxglMt.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Filter Cake","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+lraxglMt.redraw();
+
+const biyLbHcW = new PSRPlot("PNVGzMIizWuDwdFz", "Final availability", "");
+biyLbHcW.push_layers([{"data":[115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,115920.0,115920.0,57702.488,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,115920.0,57702.488,57702.488,57702.488,57702.488,115920.0,115413.125,115413.125,115413.125,115413.125,115413.125,57702.488,115413.125,115920.0,115920.0,57702.488,57702.488,115920.0,115920.0,115920.0,115920.0,115920.0,57702.488,57702.488,57702.488,57702.488,115920.0,115413.125,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0,115920.0],"domain":"linear","name":"Filter Cake","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+biyLbHcW.redraw();
+
+const HlsYOYhg = new PSRPlot("ezkmesBjlkyerTAH", "Average values", "");
+HlsYOYhg.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,927040.485,-927040.485,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+HlsYOYhg.redraw();
+
+const MGoppRZa = new PSRPlot("NexHUqmJicbMUSqd", "Scenarios", "");
+MGoppRZa.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[480854.063,966000.0,966000.0,966000.0,966000.0],[480854.063,966000.0,966000.0,966000.0,966000.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+MGoppRZa.redraw();
+
+const XqMOMsyh = new PSRPlot("ZfwyUcpabQSeFFun", "Initial availability", "");
+XqMOMsyh.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Bagasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+XqMOMsyh.redraw();
+
+const gAGIUPJq = new PSRPlot("QPkfNnBeCBbcjpdy", "Produced", "");
+gAGIUPJq.push_layers([{"data":[966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,966000.0,966000.0,480854.063,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,480854.063,480854.063,480854.063,480854.063,966000.0,961776.0,961776.0,961776.0,961776.0,961776.0,480854.063,961776.0,966000.0,966000.0,480854.063,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,480854.063,480854.063,480854.063,966000.0,961776.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0],"domain":"linear","name":"Bagasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+gAGIUPJq.redraw();
+
+const bZxTHTop = new PSRPlot("jlIbItllpLxELrdK", "Consumed by other processes", "");
+bZxTHTop.push_layers([{"data":[966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,966000.0,966000.0,480854.063,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,966000.0,480854.063,480854.063,480854.063,480854.063,966000.0,961776.0,961776.0,961776.0,961776.0,961776.0,480854.063,961776.0,966000.0,966000.0,480854.063,480854.063,966000.0,966000.0,966000.0,966000.0,966000.0,480854.063,480854.063,480854.063,480854.063,966000.0,961776.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0,966000.0],"domain":"linear","name":"Bagasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+bZxTHTop.redraw();
+
+const oTMItNqW = new PSRPlot("exdTquvPttEyHTLQ", "Sold", "");
+oTMItNqW.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Bagasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+oTMItNqW.redraw();
+
+const TOEtONXw = new PSRPlot("LBBBvoQOzkyNayYR", "Final availability", "");
+TOEtONXw.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Bagasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+TOEtONXw.redraw();
+
+const ZGhUtiFK = new PSRPlot("exWBioEWqVqRTcDl", "Average values", "");
+ZGhUtiFK.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,1457873656.32,0.0,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+ZGhUtiFK.redraw();
+
+const lGkLRnUw = new PSRPlot("pQmVJiFVgYmKGOTZ", "Scenarios", "");
+lGkLRnUw.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[1195076224.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0],[1195076224.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+lGkLRnUw.redraw();
+
+const kmsYqCPU = new PSRPlot("HJiTsSpaQNjrdoYJ", "Initial availability", "");
+kmsYqCPU.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Vinasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+kmsYqCPU.redraw();
+
+const ivAhQAtm = new PSRPlot("WpYatMleYQSVkpAm", "Produced", "");
+ivAhQAtm.push_layers([{"data":[2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1195076224.0,1200390272.0,2400819200.0,1200390272.0,1195076224.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1195076224.0,1200390272.0,1195076224.0,1195076224.0,1195076224.0,1195076224.0,1200390272.0,1195141376.0,1195141376.0,1195141376.0,1195141376.0,1195141376.0,1195076224.0,1195141376.0,1200390272.0,1200390272.0,1195076224.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1195076224.0,1195076224.0,1195076224.0,1195076224.0,1200390272.0,1195141376.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0],"domain":"linear","name":"Vinasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+ivAhQAtm.redraw();
+
+const SCKMAalK = new PSRPlot("SvbmVxrllIvfedKJ", "Consumed by other processes", "");
+SCKMAalK.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Vinasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+SCKMAalK.redraw();
+
+const icsNxuCO = new PSRPlot("IgAvyXjVEqvRBACU", "Sold", "");
+icsNxuCO.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"Vinasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+icsNxuCO.redraw();
+
+const VtyKRXAW = new PSRPlot("IGAiPyHbBXiPBznC", "Final availability", "");
+VtyKRXAW.push_layers([{"data":[2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1195076224.0,1200390272.0,2400819200.0,1200390272.0,1195076224.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1195076224.0,1200390272.0,1195076224.0,1195076224.0,1195076224.0,1195076224.0,1200390272.0,1195141376.0,1195141376.0,1195141376.0,1195141376.0,1195141376.0,1195076224.0,1195141376.0,1200390272.0,1200390272.0,1195076224.0,1195076224.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1195076224.0,1195076224.0,1195076224.0,1195076224.0,1200390272.0,1195141376.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,2400819200.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0,1200390272.0],"domain":"linear","name":"Vinasse","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+VtyKRXAW.redraw();
+
+const zAdjxwxq = new PSRPlot("weaAfJEQiozPYFAU", "Average values", "");
+zAdjxwxq.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold"],"data":[0.0,62480.147,0.0,0.0],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"waterfall","unique_tag":"","yUnit":"t"}]);
+zAdjxwxq.redraw();
+
+const MNDHldtT = new PSRPlot("uqmVhXkMnXMSyamp", "Scenarios", "");
+MNDHldtT.push_layers([{"categories":["initial availability","produced","consumed by other processes","sold","final availability"],"data":[[0.0,0.0,0.0,0.0,0.0],[51166.484,51391.199,51391.199,51391.199,103041.289],[0.0,0.0,0.0,0.0,0.0],[0.0,0.0,0.0,0.0,0.0],[51166.484,51391.199,51391.199,51391.199,103041.289]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"t"}]);
+MNDHldtT.redraw();
+
+const xskNxTez = new PSRPlot("jRRWbwHMQHZkHdkc", "Initial availability", "");
+xskNxTez.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"CO2","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+xskNxTez.redraw();
+
+const NjSQtfBc = new PSRPlot("rFVBeiYIpVfVPZhY", "Produced", "");
+NjSQtfBc.push_layers([{"data":[103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,103041.289,103041.289,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,103041.289,103041.289,51391.199,51391.199,51291.742,51391.199,103041.289,51391.199,51291.742,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51291.742,51391.199,51291.742,51291.742,51291.742,51291.742,51391.199,51166.484,51166.484,51166.484,51166.484,51166.484,51291.742,51166.484,51391.199,51391.199,51291.742,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51291.742,51291.742,51291.742,51291.742,51391.199,51166.484,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,103041.289,103041.289,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199],"domain":"linear","name":"CO2","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+NjSQtfBc.redraw();
+
+const CfqmWHbV = new PSRPlot("uJABtQwWtBkdogKE", "Consumed by other processes", "");
+CfqmWHbV.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"CO2","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+CfqmWHbV.redraw();
+
+const SsiiGVIJ = new PSRPlot("mhibYXrNXsxrzLeT", "Sold", "");
+SsiiGVIJ.push_layers([{"data":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"domain":"linear","name":"CO2","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+SsiiGVIJ.redraw();
+
+const SUxiICAa = new PSRPlot("bqExKRqOiernAPLQ", "Final availability", "");
+SUxiICAa.push_layers([{"data":[103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,103041.289,103041.289,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,103041.289,103041.289,51391.199,51391.199,51291.742,51391.199,103041.289,51391.199,51291.742,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51291.742,51391.199,51291.742,51291.742,51291.742,51291.742,51391.199,51166.484,51166.484,51166.484,51166.484,51166.484,51291.742,51166.484,51391.199,51391.199,51291.742,51291.742,51391.199,51391.199,51391.199,51391.199,51391.199,51291.742,51291.742,51291.742,51291.742,51391.199,51166.484,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,103041.289,103041.289,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,51391.199,51391.199,51391.199,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,103041.289,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199,51391.199],"domain":"linear","name":"CO2","showInLegend":false,"type":"histogram","yUnit":"t"}]);
+SUxiICAa.redraw();
+
+const HMKWywtT = new PSRPlot("TWZZvEWxoTaKuDKP", "", "");
+HMKWywtT.push_layers([{"categories":["Electricity from residues","Ethanol 1G + Sugar Mill"],"data":[3749.039,-0.028],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","showInLegend":false,"type":"column","unique_tag":"","yUnit":"k$"}]);
+HMKWywtT.redraw();
+
+const jzpPKwLb = new PSRPlot("VdcpLbKlPjMPFdCY", "", "");
+jzpPKwLb.push_layers([{"categories":["Harvesting","Electricity from residues","Sugar + E1G","E1G + Sugar"],"data":[[27477.376,55200.0,55200.0,55200.0,55200.0],[1391.724,2795.871,2795.871,2795.871,2795.871],[0.0,0.0,92736.0,92736.0,92736.0],[0.0,0.0,0.0,46161.992,92736.0]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"k$"}]);
+jzpPKwLb.redraw();
+
+const MJAhtpUT = new PSRPlot("qMcuPRYjautEuvCZ", "", "");
+MJAhtpUT.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[[19085.232,66677.851,109547.88,149748.928,250921.584],[30956.0,43599.898,53808.788,75786.638,197075.584],[8742.801,17563.636,17563.636,17563.636,17563.636]],"domain":"category","name":"","showInLegend":false,"type":"box_plot","unique_tag":"","yUnit":"k$"}]);
+MJAhtpUT.redraw();
+
+const iebpbbMU = new PSRPlot("wxFAigAYRUeIcuFD", "", "");
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[45540.176,132478.592,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":1.0,"sequence_label":"Scenario 1","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[52739.544,130069.888,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":2.0,"sequence_label":"Scenario 2","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[43196.196,141675.456,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":3.0,"sequence_label":"Scenario 3","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[39345.372,147587.728,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":4.0,"sequence_label":"Scenario 4","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[37001.392,145179.024,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":5.0,"sequence_label":"Scenario 5","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[44368.188,156127.664,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":6.0,"sequence_label":"Scenario 6","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[51400.124,149777.456,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":7.0,"sequence_label":"Scenario 7","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[47047.02,130069.888,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":8.0,"sequence_label":"Scenario 8","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[45540.176,127223.24,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":9.0,"sequence_label":"Scenario 9","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[44368.188,102917.256,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":10.0,"sequence_label":"Scenario 10","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[43865.904,98318.824,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":11.0,"sequence_label":"Scenario 11","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21668.824,44036.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":12.0,"sequence_label":"Scenario 12","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93467.456,46309.496,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":13.0,"sequence_label":"Scenario 13","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[99497.616,45433.664,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":14.0,"sequence_label":"Scenario 14","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93467.456,44776.792,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":15.0,"sequence_label":"Scenario 15","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[103852.728,45433.664,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":16.0,"sequence_label":"Scenario 16","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[114908.016,49155.94,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":17.0,"sequence_label":"Scenario 17","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[124288.264,51236.036,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":18.0,"sequence_label":"Scenario 18","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[137353.6,49155.94,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":19.0,"sequence_label":"Scenario 19","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[180234.736,46528.452,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":20.0,"sequence_label":"Scenario 20","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[178224.688,48827.504,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":21.0,"sequence_label":"Scenario 21","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[163819.296,57804.76,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":22.0,"sequence_label":"Scenario 22","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[163149.28,61636.516,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":23.0,"sequence_label":"Scenario 23","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[198995.232,58133.196,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":24.0,"sequence_label":"Scenario 24","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[220770.8,53754.048,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":25.0,"sequence_label":"Scenario 25","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[178224.688,50907.6,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":26.0,"sequence_label":"Scenario 26","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[122613.224,45652.624,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":27.0,"sequence_label":"Scenario 27","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[111222.92,44557.836,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":28.0,"sequence_label":"Scenario 28","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[104857.752,46309.496,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":29.0,"sequence_label":"Scenario 29","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[132998.496,45652.624,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":30.0,"sequence_label":"Scenario 30","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[144388.8,46528.452,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":31.0,"sequence_label":"Scenario 31","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[145728.832,54082.484,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":32.0,"sequence_label":"Scenario 32","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[186934.912,62183.908,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":33.0,"sequence_label":"Scenario 33","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[215075.648,66563.056,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":34.0,"sequence_label":"Scenario 34","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[203350.336,67438.888,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":35.0,"sequence_label":"Scenario 35","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[237186.224,64154.524,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":36.0,"sequence_label":"Scenario 36","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[250921.584,66782.016,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":37.0,"sequence_label":"Scenario 37","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[240201.312,70285.336,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":38.0,"sequence_label":"Scenario 38","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[200335.264,72255.952,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":39.0,"sequence_label":"Scenario 39","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[172529.536,76087.704,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":40.0,"sequence_label":"Scenario 40","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[171189.504,74883.44,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":41.0,"sequence_label":"Scenario 41","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[209380.496,77839.368,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":42.0,"sequence_label":"Scenario 42","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[220100.784,84408.088,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":43.0,"sequence_label":"Scenario 43","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[219095.76,82437.472,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":44.0,"sequence_label":"Scenario 44","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[194640.112,78386.76,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":45.0,"sequence_label":"Scenario 45","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[190284.992,77839.368,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":46.0,"sequence_label":"Scenario 46","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[174874.592,83313.296,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":47.0,"sequence_label":"Scenario 47","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[172194.528,66234.62,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":48.0,"sequence_label":"Scenario 48","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[170519.472,62183.908,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":49.0,"sequence_label":"Scenario 49","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[184589.856,63059.74,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":50.0,"sequence_label":"Scenario 50","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[175879.616,65030.356,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":51.0,"sequence_label":"Scenario 51","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[156114.096,63059.74,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":52.0,"sequence_label":"Scenario 52","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[146063.84,61308.08,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":53.0,"sequence_label":"Scenario 53","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[155109.072,59337.46,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":54.0,"sequence_label":"Scenario 54","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[169179.44,72912.824,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":55.0,"sequence_label":"Scenario 55","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[151423.984,74883.44,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":56.0,"sequence_label":"Scenario 56","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[150753.952,68533.672,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":57.0,"sequence_label":"Scenario 57","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[143383.76,69737.936,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":58.0,"sequence_label":"Scenario 58","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[143048.752,68862.112,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":59.0,"sequence_label":"Scenario 59","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[144723.808,66234.62,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":60.0,"sequence_label":"Scenario 60","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[139028.656,66782.016,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":61.0,"sequence_label":"Scenario 61","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[67807.984,137952.912,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":62.0,"sequence_label":"Scenario 62","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[65129.148,147149.776,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":63.0,"sequence_label":"Scenario 63","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[65296.576,143646.208,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":64.0,"sequence_label":"Scenario 64","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[61110.9,154375.888,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":65.0,"sequence_label":"Scenario 65","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[60441.192,148463.616,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":66.0,"sequence_label":"Scenario 66","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[62617.744,141237.504,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":67.0,"sequence_label":"Scenario 67","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[60273.764,137952.912,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":68.0,"sequence_label":"Scenario 68","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[64459.44,140580.592,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":69.0,"sequence_label":"Scenario 69","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[135343.552,58461.632,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":70.0,"sequence_label":"Scenario 70","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[126633.328,61745.992,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":71.0,"sequence_label":"Scenario 71","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[60608.616,132916.536,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":72.0,"sequence_label":"Scenario 72","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[57427.504,117588.44,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":73.0,"sequence_label":"Scenario 73","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[121608.192,58461.632,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":74.0,"sequence_label":"Scenario 74","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[65631.432,162696.848,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":75.0,"sequence_label":"Scenario 75","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[63622.304,155689.712,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":76.0,"sequence_label":"Scenario 76","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[64124.588,132259.616,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":77.0,"sequence_label":"Scenario 77","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[61278.324,125909.408,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":78.0,"sequence_label":"Scenario 78","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[60776.044,124814.544,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":79.0,"sequence_label":"Scenario 79","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[57092.648,128975.024,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":80.0,"sequence_label":"Scenario 80","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[114238.0,53206.656,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":81.0,"sequence_label":"Scenario 81","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[118593.112,48280.112,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":82.0,"sequence_label":"Scenario 82","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[57594.928,134668.32,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":83.0,"sequence_label":"Scenario 83","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[53576.68,112333.088,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":84.0,"sequence_label":"Scenario 84","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[109212.872,40507.124,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":85.0,"sequence_label":"Scenario 85","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[102847.704,39850.252,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":86.0,"sequence_label":"Scenario 86","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21918.848,41747.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":87.0,"sequence_label":"Scenario 87","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[95812.52,45652.624,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":88.0,"sequence_label":"Scenario 88","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[44200.76,94158.336,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":89.0,"sequence_label":"Scenario 89","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[90787.384,43791.484,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":90.0,"sequence_label":"Scenario 90","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[20502.04,44908.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":91.0,"sequence_label":"Scenario 91","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19668.624,42183.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":92.0,"sequence_label":"Scenario 92","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[89782.36,44010.444,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":93.0,"sequence_label":"Scenario 93","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[107202.816,45214.708,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":94.0,"sequence_label":"Scenario 94","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[110217.896,43572.528,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":95.0,"sequence_label":"Scenario 95","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[112562.96,41601.912,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":96.0,"sequence_label":"Scenario 96","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[97152.552,38536.508,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":97.0,"sequence_label":"Scenario 97","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[107537.824,40178.688,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":98.0,"sequence_label":"Scenario 98","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[113232.976,39631.292,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":99.0,"sequence_label":"Scenario 99","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[119263.136,44010.444,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":100.0,"sequence_label":"Scenario 100","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[129313.4,45214.708,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":101.0,"sequence_label":"Scenario 101","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[148743.904,47623.24,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":102.0,"sequence_label":"Scenario 102","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[140703.696,44010.444,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":103.0,"sequence_label":"Scenario 103","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[148073.888,41382.952,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":104.0,"sequence_label":"Scenario 104","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[166499.376,44667.316,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":105.0,"sequence_label":"Scenario 105","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[159464.192,46966.368,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":106.0,"sequence_label":"Scenario 106","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[146398.848,47075.848,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":107.0,"sequence_label":"Scenario 107","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[144053.792,50579.164,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":108.0,"sequence_label":"Scenario 108","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[151088.976,42587.22,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":109.0,"sequence_label":"Scenario 109","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[142713.744,43682.008,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":110.0,"sequence_label":"Scenario 110","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[123618.248,43244.092,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":111.0,"sequence_label":"Scenario 111","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[118593.112,46637.932,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":112.0,"sequence_label":"Scenario 112","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[109882.888,42368.26,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":113.0,"sequence_label":"Scenario 113","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[101172.656,43791.484,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":114.0,"sequence_label":"Scenario 114","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[110217.896,44010.444,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":115.0,"sequence_label":"Scenario 115","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[106197.792,44886.272,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":116.0,"sequence_label":"Scenario 116","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[100167.632,45324.188,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":117.0,"sequence_label":"Scenario 117","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[108877.856,41163.996,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":118.0,"sequence_label":"Scenario 118","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[111222.92,40616.604,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":119.0,"sequence_label":"Scenario 119","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[111892.936,37441.72,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":120.0,"sequence_label":"Scenario 120","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[97822.568,37660.676,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":121.0,"sequence_label":"Scenario 121","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[99497.616,41711.388,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":122.0,"sequence_label":"Scenario 122","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[91122.392,42149.304,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":123.0,"sequence_label":"Scenario 123","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21168.774,42183.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":124.0,"sequence_label":"Scenario 124","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[94472.48,42258.784,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":125.0,"sequence_label":"Scenario 125","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21752.164,40657.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":126.0,"sequence_label":"Scenario 126","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19418.6,40984.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":127.0,"sequence_label":"Scenario 127","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19501.94,39131.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":128.0,"sequence_label":"Scenario 128","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19168.574,36842.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":129.0,"sequence_label":"Scenario 129","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[97487.56,37003.804,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":130.0,"sequence_label":"Scenario 130","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[94392.928,35643.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":131.0,"sequence_label":"Scenario 131","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[88389.136,34880.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":132.0,"sequence_label":"Scenario 132","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93725.84,36406.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":133.0,"sequence_label":"Scenario 133","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93725.84,38368.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":134.0,"sequence_label":"Scenario 134","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[92058.12,39131.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":135.0,"sequence_label":"Scenario 135","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[22002.19,38041.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":136.0,"sequence_label":"Scenario 136","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[89056.224,39349.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":137.0,"sequence_label":"Scenario 137","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[91122.392,44667.316,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":138.0,"sequence_label":"Scenario 138","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[90117.368,43244.092,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":139.0,"sequence_label":"Scenario 139","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[20502.04,39240.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":140.0,"sequence_label":"Scenario 140","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21918.848,39894.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":141.0,"sequence_label":"Scenario 141","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[92127.424,45214.708,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":142.0,"sequence_label":"Scenario 142","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[95477.504,44995.752,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":143.0,"sequence_label":"Scenario 143","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[99162.608,40945.04,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":144.0,"sequence_label":"Scenario 144","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[107872.832,37770.156,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":145.0,"sequence_label":"Scenario 145","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[106867.808,38427.028,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":146.0,"sequence_label":"Scenario 146","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19168.574,30956.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":147.0,"sequence_label":"Scenario 147","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[19085.232,32155.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":148.0,"sequence_label":"Scenario 148","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[20085.332,32155.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":149.0,"sequence_label":"Scenario 149","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[21752.164,36624.0,8742.801],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":150.0,"sequence_label":"Scenario 150","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93467.456,39959.728,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":151.0,"sequence_label":"Scenario 151","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[93058.752,37278.0,17486.836],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":152.0,"sequence_label":"Scenario 152","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[96482.536,41163.996,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":153.0,"sequence_label":"Scenario 153","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[106197.792,42915.656,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":154.0,"sequence_label":"Scenario 154","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[107202.816,42039.824,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":155.0,"sequence_label":"Scenario 155","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[114238.0,38645.984,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":156.0,"sequence_label":"Scenario 156","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[116918.072,45324.188,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":157.0,"sequence_label":"Scenario 157","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[129313.4,49374.9,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":158.0,"sequence_label":"Scenario 158","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[109212.872,52878.216,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":159.0,"sequence_label":"Scenario 159","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[128643.376,61308.08,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":160.0,"sequence_label":"Scenario 160","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[64124.588,146930.8,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":161.0,"sequence_label":"Scenario 161","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[65129.148,137733.936,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":162.0,"sequence_label":"Scenario 162","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[132328.48,64482.96,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":163.0,"sequence_label":"Scenario 163","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[146398.848,65030.356,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":164.0,"sequence_label":"Scenario 164","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[146398.848,69737.936,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":165.0,"sequence_label":"Scenario 165","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[71156.528,150434.368,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":166.0,"sequence_label":"Scenario 166","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[68645.12,197075.584,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":167.0,"sequence_label":"Scenario 167","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[69649.68,173645.488,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":168.0,"sequence_label":"Scenario 168","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[134673.536,62512.344,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":169.0,"sequence_label":"Scenario 169","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[132998.496,62402.864,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":170.0,"sequence_label":"Scenario 170","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[144053.792,71380.12,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":171.0,"sequence_label":"Scenario 171","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[71491.384,152405.12,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":172.0,"sequence_label":"Scenario 172","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[71658.808,159412.256,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":173.0,"sequence_label":"Scenario 173","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[69482.256,161383.008,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":174.0,"sequence_label":"Scenario 174","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[64794.296,145616.96,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":175.0,"sequence_label":"Scenario 175","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[65966.284,147368.752,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":176.0,"sequence_label":"Scenario 176","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[67975.408,141237.504,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":177.0,"sequence_label":"Scenario 177","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[66301.14,142551.344,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":178.0,"sequence_label":"Scenario 178","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[72495.944,149120.528,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":179.0,"sequence_label":"Scenario 179","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[148073.888,63716.612,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":180.0,"sequence_label":"Scenario 180","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[160804.224,63388.176,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":181.0,"sequence_label":"Scenario 181","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[163149.28,62840.78,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":182.0,"sequence_label":"Scenario 182","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[164489.328,64920.876,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":183.0,"sequence_label":"Scenario 183","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[199330.24,70066.376,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":184.0,"sequence_label":"Scenario 184","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[184924.864,70504.288,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":185.0,"sequence_label":"Scenario 185","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[169179.44,72474.904,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":186.0,"sequence_label":"Scenario 186","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[178224.688,70613.768,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":187.0,"sequence_label":"Scenario 187","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[184924.864,62621.824,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":188.0,"sequence_label":"Scenario 188","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[193970.096,68095.76,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":189.0,"sequence_label":"Scenario 189","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[200000.256,65687.228,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":190.0,"sequence_label":"Scenario 190","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[192295.056,53863.528,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":191.0,"sequence_label":"Scenario 191","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[152094.0,48280.112,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":192.0,"sequence_label":"Scenario 192","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[178224.688,45981.06,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":193.0,"sequence_label":"Scenario 193","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[166834.384,43463.048,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":194.0,"sequence_label":"Scenario 194","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[166164.368,45652.624,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":195.0,"sequence_label":"Scenario 195","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[143383.76,47842.196,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":196.0,"sequence_label":"Scenario 196","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[135008.544,51564.472,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":197.0,"sequence_label":"Scenario 197","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[150083.936,55834.144,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":198.0,"sequence_label":"Scenario 198","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[140033.68,55067.792,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":199.0,"sequence_label":"Scenario 199","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.push_layers([{"categories":["Sugar","Ethanol 1G","Electricity"],"data":[143048.752,52768.74,17563.636],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"","sequence":200.0,"sequence_label":"Scenario 200","showInLegend":false,"type":"column","unique_tag":"","yMax":250921.584,"yMin":0.0,"yUnit":"k$"}]);
+iebpbbMU.redraw();
+
+iebpbbMU.playElement = document.getElementById("play-button-wxFAigAYRUeIcuFD")
+iebpbbMU.pauseElement = document.getElementById("pause-button-wxFAigAYRUeIcuFD")
+iebpbbMU.rangeInput = document.getElementById("range-input-wxFAigAYRUeIcuFD")
+iebpbbMU.titleElement = document.getElementById("titleChart-wxFAigAYRUeIcuFD")
+iebpbbMU.titleElement.textContent = iebpbbMU.series[iebpbbMU.current_series][0].sequence_label;
+iebpbbMU.rangeInput.value = iebpbbMU.current_series;
+iebpbbMU.rangeInput.setAttribute("min", 0);
+iebpbbMU.rangeInput.setAttribute("max", iebpbbMU.series[iebpbbMU.series.length-1][0].sequence-1);
+iebpbbMU.playElement.addEventListener("click",function(e){
+e.preventDefault();
+iebpbbMU.playElement.style.display ="none";
+iebpbbMU.pauseElement.style.display ="inline-block";
+iebpbbMU.play();
+});
+
+iebpbbMU.pauseElement.addEventListener("click",function(e){
+e.preventDefault();
+iebpbbMU.pauseElement.style.display = "none";
+iebpbbMU.playElement.style.display ="inline-block";
+iebpbbMU.pause();
+});
+
+iebpbbMU.rangeInput.addEventListener('click', function(e) {
+e.preventDefault();
+iebpbbMU.pauseElement.style.display = "none";
+iebpbbMU.playElement.style.display ="inline-block";
+iebpbbMU.update_play();
+});
+
+iebpbbMU.rangeInput.addEventListener('input', function(e) {
+iebpbbMU.pauseElement.style.display = "none";
+iebpbbMU.playElement.style.display ="inline-block";
+iebpbbMU.update_play();
+});
+
+
+const EgYrhltH = new PSRPlot("VzqMEyRoVFIcHQNi", "", "");
+EgYrhltH.push_layers([{"data":[41101.522,45892.186,47954.406,50015.854,45263.17,63578.606,64260.334,40199.662,35846.17,10368.198,5267.482,-4332.478,2859.706,8014.034,1327.002,12369.146,27146.71,38607.054,49592.294,89845.942,90134.946,84706.81,87868.55,120211.182,137607.602,92215.042,31348.602,18863.51,14250.002,41733.874,54000.006,62894.07,112201.574,144721.458,133871.978,164423.502,180786.354,173569.402,135673.97,111699.994,109155.698,150302.618,167591.626,164615.986,136109.626,131207.114,121270.642,101511.902,95786.134,110732.35,103992.726,82256.59,70454.674,77529.286,105175.018,89390.178,82370.378,76204.45,74993.618,74041.182,68893.426,68843.65,75361.678,72025.538,78569.542,71987.562,66938.002,61309.43,68122.786,56887.938,51462.074,56607.906,38098.698,43152.578,91411.034,82394.77,59466.958,50270.486,48673.342,49150.426,30527.41,29955.978,55346.002,28992.522,12802.75,5780.71,-6371.454,4547.898,1441.85,-2338.378,-4627.262,-8185.678,-3124.442,15500.278,16873.178,17247.626,-1228.186,10799.266,15947.022,26356.334,37610.862,59449.898,47796.894,52539.594,74249.446,69513.314,56557.45,57715.71,56758.95,49478.506,29945.094,28313.798,15333.902,8046.894,17311.094,14166.818,8574.574,13124.606,14922.278,12417.41,-1434.002,4291.758,-3645.55,-6685.528,-185.982,-7628.138,-9634.702,-11404.362,-14026.728,-2425.882,-6299.016,-13065.808,-6203.104,-4241.104,-5145.824,-9994.112,-7929.72,-1127.538,-3555.786,-10295.262,-8224.454,424.886,3556.01,3190.402,8725.742,8377.59,-19912.728,-18797.07,-17796.97,-11661.138,-3490.062,-5998.192,729.286,12196.202,12325.394,15966.738,25325.014,41771.054,25173.842,53034.21,74138.142,65945.838,59894.194,74511.958,79219.538,84673.65,128803.458,106377.922,60268.634,58484.114,78516.666,86979.258,94153.818,93948.018,73494.01,76417.79,72295.666,71935.238,84699.226,74873.254,87275.154,89072.814,92492.958,132479.37,118511.906,104737.098,111921.21,110629.442,125148.61,128770.238,109241.338,63456.866,87288.502,73380.186,74899.746,54308.71,49655.77,69000.834,58184.226,58900.246],"domain":"linear","name":"Total","showInLegend":false,"type":"histogram","yUnit":"k$"}]);
+EgYrhltH.redraw();
+
+const XwgJprwv = new PSRPlot("RGpuGxtuhlCvsPIh", "", "");
+XwgJprwv.push_layers([{"categories":["Total"],"data":[148401.751],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"Costs","type":"column","unique_tag":"Costs","yUnit":"k$"}]);
+XwgJprwv.push_layers([{"categories":["Total"],"color":"#66A61E","data":[200529.824],"dataLabels":{"enabled":true,"format":"{point.y:,.0f}"},"domain":"category","name":"Revenues","type":"column","unique_tag":"Revenues","yUnit":"k$"}]);
+XwgJprwv.redraw();
+XwgJprwv.horizontal_legend();
+
+// remove loading overlay
+document.getElementById("loadingBlocker").style.display = 'none';
+</script>
+<script>
+// move user to the correct position in screen
+if (section_id.length > 0) {
+window.location.href = window.location.href;
+}
+</script>
+</body>
+</html>

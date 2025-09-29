@@ -1,0 +1,5 @@
+Varies per block?       ,1,Unit,$,2,1,2024
+Varies per sequence?    ,1
+# of agents             ,15
+Stag,Seq.,Blck,Harvesting,Biomethane production,Steam methane reforming,Pyrolysis of biomass,Alcohol to jet,Fischer-Tropsch (Gaseification),Electricity from residues,Ethanol 1G + Sugar Mill,Electrolysis,BECCS (Bioethanol),E-methanol syntesis,Fischer-Tropsch (e-fuel),Biomethanol Production,Steam ethanol 1G Reforming,Steam ethanol 2G Reforming
+1,1,1,0.0,0.0,0.0,0.0,0.0,0.0,3.7490389982722257e6,-28.140536209996117,0.0,0.0,0.0,0.0,0.0,0.0,0.0

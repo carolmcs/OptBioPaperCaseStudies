@@ -1,0 +1,5 @@
+Varies per block?       ,1,Unit,t,2,1,2024
+Varies per sequence?    ,1
+# of agents             ,8
+Stag,Seq.,Blck,Biomethane production,Pyrolysis of biomass,Fischer-Tropsch (Gaseification),Electricity from residues,Ethanol 1G + Sugar Mill,BECCS (Bioethanol),E-methanol syntesis,Fischer-Tropsch (e-fuel)
+1,1,1,115920.0,0.0,0.0,227676.7677,0.0,0.0,0.0,0.0
